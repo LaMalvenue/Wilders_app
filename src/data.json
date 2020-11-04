@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Jane Doe",
+        "image": "blank-profile-picture-female.png",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "skills": 
+        [
+            { "name": "HTML", "votes": 5 },
+            { "name": "CSS", "votes": 3 }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Anais Doe",
+        "image": "blank-profile-picture-female.png",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "skills": 
+        [
+            { "name": "HTML", "votes": 5 },
+            { "name": "CSS", "votes": 8 },
+            { "name": "JS", "votes": 3 },
+            { "name": "Java", "votes": 7 },
+            { "name": "PHP", "votes": 9 }
+        ]
+    }
+]

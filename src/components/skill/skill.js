@@ -14,3 +14,5 @@ Skill.propTypes = {
     name: PropTypes.string.isRequired,
     votes: PropTypes.number.isRequired
 };
+
+export default Skill;

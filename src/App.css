@@ -1,7 +1,7 @@
 /* 
  * global. css 
  */
- body {
+body {
   font-family: sans-serif;
   color: #222;
   margin: 0;
@@ -67,11 +67,3 @@ footer {
   display: inline-block;
 }
 
-.card .skills {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
