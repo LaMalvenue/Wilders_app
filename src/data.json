@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Jane Doe",
-        "image": "img/profile.png",
+        "image": "/profile.png",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "skills": 
         [
@@ -13,7 +13,7 @@
     {
         "id": 2,
         "name": "Anais Doe",
-        "image": "./img/profile.png",
+        "image": "/profile.png",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "skills": 
         [
@@ -27,7 +27,7 @@
     {
         "id": 3,
         "name": "Lala Lolo",
-        "image": "https://image.shutterstock.com/image-vector/male-silhouette-avatar-profile-picture-260nw-199246382.jpg",
+        "image": "/profile.png",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "skills": 
         [
