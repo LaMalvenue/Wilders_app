@@ -15,20 +15,22 @@ function App() {
             </Col>
           </Row>
       </header>
-      <body>
-        <Container fluid>
+      <main>
+        <Container>
           <Row>
-            <h2>Wilders</h2>
+            <Col md>
+              <h2>Wilders</h2>
+            </Col>
           </Row>
           <Row>
             {wilders.map(data => (
-              <Col md={4} className="mb-5" key={`{data.id}`}>
+              <Col md={6} lg={4} className="mb-4 mt-2" key={`{data.id}`}>
                 <Wilder data={data}/>
               </Col>
             ))}
           </Row>
         </Container>
-      </body>
+      </main>
       <footer>
         <div className="container">
           <p>&copy; 2020 Wild Code School</p>
