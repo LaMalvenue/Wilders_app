@@ -2,7 +2,7 @@
     {
         "id": 1,
         "name": "Jane Doe",
-        "image": "blank-profile-picture-female.png",
+        "image": "img/blank-profile-picture-female.png",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "skills": 
         [
@@ -13,7 +13,7 @@
     {
         "id": 2,
         "name": "Anais Doe",
-        "image": "blank-profile-picture-female.png",
+        "image": "img/blank-profile-picture-female.png",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         "skills": 
         [
