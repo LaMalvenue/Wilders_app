@@ -2,19 +2,21 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import "./App.css";
-import { Wilder } from "./components/wilder/wilder";
+import { Wilder } from "./components/Wilder/Wilder";
+import { Header } from "./styled-components/Header";
+import { Footer } from "./styled-components/Footer";
 import wilders from "./data.json";
 
 function App() {
   return (
     <div>
-      <header>
+      <Header>
           <Row>
             <Col md>
               <h1>Wilders Book</h1>
             </Col>
           </Row>
-      </header>
+      </Header>
       <main>
         <Container>
           <Row>
@@ -31,11 +33,11 @@ function App() {
           </Row>
         </Container>
       </main>
-      <footer>
+      <Footer>
         <div className="container">
           <p>&copy; 2020 Wild Code School</p>
         </div>
-      </footer>
+      </Footer>
     </div>
   );
 }

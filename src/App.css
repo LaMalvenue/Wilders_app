@@ -39,20 +39,8 @@ p {
   padding: 24px;
 }
 
-header {
-  background-color: #F76C6C;
-  color: #fff;
-  padding: 1.5rem;
-
-}
-
 main {
   margin: 1.5rem 0;
-}
-
-footer {
-  border-top: 2px solid #F76C6C;
-  text-align: center;
 }
 
 footer p {

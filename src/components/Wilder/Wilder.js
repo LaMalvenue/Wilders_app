@@ -1,7 +1,7 @@
-import "./wilder.css";
+import "./Wilder.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card } from 'react-bootstrap';
-import { Skill } from "../skill/skill";
+import { Skill } from "../Skill/Skill";
 
 export function Wilder({ data }) {
     const skills = data.skills;
