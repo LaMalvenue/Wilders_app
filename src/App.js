@@ -1,17 +1,14 @@
 // *************** Imports ***************
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-// ****** Bootstrap ******
+// ****** Style ******
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "./style/App.css";
 import {Container, Row, Col} from 'react-bootstrap';
-// ****** CSS ******
-import "./App.css";
+import {Header, Footer} from "./style/elements";
 // ****** Components ******
 import {Wilder} from "./components/Wilder/Wilder";
-import {AddWilder} from "./components/AddWilder/AddWilder";
-// ****** Styled-components ******
-import {Header} from "./styled-components/Header";
-import {Footer} from "./styled-components/Footer";
+import {AddWilder} from "./components/AddWilder";
 
 function App() {
 
@@ -22,8 +19,8 @@ function App() {
                     const response = await axios.get('http://localhost:5000/api/wilder');
                     const wilders = response.data.result;
                     setWilders(wilders);
-                } catch {
-                    console.error('Error');
+                } catch (error) {
+                    console.error(error);
                 }
             };
             fetchWilders();

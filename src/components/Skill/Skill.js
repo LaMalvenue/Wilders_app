@@ -1,12 +1,12 @@
 import "./Skill.css";
 import PropTypes from "prop-types";
-import { Badge } from "../../styled-components/Badge";
+import { Badge } from "../../style/elements";
 
-export const Skill = ({ title, count }, index) => {
+export const Skill = ({ title, count }) => {
     return (
         <li>
             {title}
-            <Badge count={count} key={index}>{count}</Badge>
+            <Badge count={count} key={title}>{count}</Badge>
         </li>
     );
 };

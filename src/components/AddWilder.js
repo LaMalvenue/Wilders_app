@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Button, FormGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import axios from "axios";
-import { ReactComponent as LoadingIcon } from "../../img/arrows.svg";
+import { ReactComponent as LoadingIcon } from "../img/arrows.svg";
+import { Button, Form, Input } from "../style/form-elements";
 
 export const AddWilder = () => {
     const [name, setName] = useState('');
@@ -52,14 +53,16 @@ export const AddWilder = () => {
         <div>
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <input id="name" type="text" placeholder="Name" value={name} onChange={ e => setName(e.target.value)}/>
+                    <Input id="name" type="text" placeholder="Name" value={name} onChange={ e => setName(e.target.value)}/>
                 </FormGroup>
                 <FormGroup>
-                    <input id="city" type="text" placeholder="City" value={city} onChange={ e => setCity(e.target.value)}/>
+                    <Input id="city" type="text" placeholder="City" value={city} onChange={ e => setCity(e.target.value)}/>
                 </FormGroup>
                 { error && <p>{error}</p> }
                 <FormGroup>
                     <Button
+                        variant="dark"
+                        className="button"
                         type="submit"
                     >
                         {loading && !delayed ? <LoadingIcon /> : "Ajouter"}
