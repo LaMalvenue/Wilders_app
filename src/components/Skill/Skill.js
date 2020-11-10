@@ -2,18 +2,18 @@ import "./Skill.css";
 import PropTypes from "prop-types";
 import { Badge } from "../../styled-components/Badge";
 
-export const Skill = ({ title, count }) => {
+export const Skill = ({ title, count }, index) => {
     return (
         <li>
             {title}
-            <Badge votes={count} key={title}>{count}</Badge>
+            <Badge count={count} key={index}>{count}</Badge>
         </li>
     );
 };
 
 Skill.propTypes = {
-    name: PropTypes.string.isRequired,
-    votes: PropTypes.number.isRequired
+    title: PropTypes.string.isRequired,
+    count: PropTypes.number
 };
 
 export default Skill;

@@ -5,7 +5,6 @@ import { Card } from 'react-bootstrap';
 import { Skill } from "../Skill/Skill";
 
 export function Wilder({ name, skills }) {
-    const skill = skills;
     const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 
     return (
@@ -22,7 +21,7 @@ export function Wilder({ name, skills }) {
                     <h3>Wild Skills</h3>
                     <ul className="skills">
                         {
-                            skills.map(({title, count}, index) => <Skill title={title} count={count} key={index}/>)
+                            skills.map(({title, count}) => <Skill title={title} count={count} key={title}/>)
                         }
                     </ul>
                 </Card.Body>

@@ -1,20 +1,41 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormGroup } from 'react-bootstrap';
 import axios from "axios";
+import { ReactComponent as LoadingIcon } from "../../img/arrows.svg";
 
 export const AddWilder = () => {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState('false');
+    const [loading, setLoading] = useState(false);
+    const [delayed, setDelayed] = useState(false);
 
     const saveWilder = async () => {
-        await axios.post('http://localhost:3200/api/wilders', {name, city});
-        alert(`Wilder saved !`);
+        try {
+            setDelayed(true)
+            setLoading(true);
+            setTimeout(() => setDelayed(false), 1000);
+            const result = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city});
+            if (result.data.success) {
+                setError("");
+            }
+            console.log(result);
+            alert(`Wilder saved !`);
+        } catch (e) {
+            if (error.response) {
+                setError(error.response.data.message);
+            } else {
+                setError(error.message);
+            }
+        } finally {
+            setLoading(false);
+        }
     }
 
     const submit = async event => {
         event.preventDefault();
+
+
         console.log(name, city);
 
         if(name.trim().length === 0 || city.trim().length === 0) {
@@ -29,13 +50,21 @@ export const AddWilder = () => {
 
     return (
         <div>
-            {
-                error && <p>{error}</p>
-            }
             <Form onSubmit={submit}>
-                <input type="text" placeholder="Name" value={name} onChange={ e => setName(e.target.value)}/>
-                <input type="text" placeholder="City" value={city} onChange={ e => setCity(e.target.value)}/>
-                <Button type="submit">Envoyer</Button>
+                <FormGroup>
+                    <input id="name" type="text" placeholder="Name" value={name} onChange={ e => setName(e.target.value)}/>
+                </FormGroup>
+                <FormGroup>
+                    <input id="city" type="text" placeholder="City" value={city} onChange={ e => setCity(e.target.value)}/>
+                </FormGroup>
+                { error && <p>{error}</p> }
+                <FormGroup>
+                    <Button
+                        type="submit"
+                    >
+                        {loading && !delayed ? <LoadingIcon /> : "Ajouter"}
+                    </Button>
+                </FormGroup>
             </Form>
         </div>
     )

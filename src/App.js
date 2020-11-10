@@ -1,29 +1,33 @@
-
+// *************** Imports ***************
 import React, {useEffect, useState} from "react";
+import axios from "axios";
+// ****** Bootstrap ******
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Col} from 'react-bootstrap';
+// ****** CSS ******
 import "./App.css";
+// ****** Components ******
 import {Wilder} from "./components/Wilder/Wilder";
+import {AddWilder} from "./components/AddWilder/AddWilder";
+// ****** Styled-components ******
 import {Header} from "./styled-components/Header";
 import {Footer} from "./styled-components/Footer";
-import axios from "axios";
-import {AddWilder} from "./components/AddWilder/AddWilder";
 
 function App() {
 
     const [wilders, setWilders] = useState([]);
-    useEffect(() => {
-        const fetchWilders = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/api/wilder');
-                const wilders = response.data.result;
-                setWilders(wilders);
-            } catch {
-                console.error('Error');
-            }
-        };
-        fetchWilders();
-    }, []);
+        useEffect(() => {
+            const fetchWilders = async () => {
+                try {
+                    const response = await axios.get('http://localhost:5000/api/wilder');
+                    const wilders = response.data.result;
+                    setWilders(wilders);
+                } catch {
+                    console.error('Error');
+                }
+            };
+            fetchWilders();
+        }, []);
 
     return (
         <div>
