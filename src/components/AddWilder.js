@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FormGroup } from 'react-bootstrap';
 import axios from "axios";
 import { ReactComponent as LoadingIcon } from "../img/arrows.svg";
-import { Button, Form, Input } from "../style/form-elements";
+import { Button, Form, Input, Error } from "../style/form-elements";
 
 export const AddWilder = () => {
     const [name, setName] = useState('');
@@ -22,7 +22,7 @@ export const AddWilder = () => {
             }
             console.log(result);
             alert(`Wilder saved !`);
-        } catch (e) {
+        } catch (error) {
             if (error.response) {
                 setError(error.response.data.message);
             } else {
@@ -35,10 +35,6 @@ export const AddWilder = () => {
 
     const submit = async event => {
         event.preventDefault();
-
-
-        console.log(name, city);
-
         if(name.trim().length === 0 || city.trim().length === 0) {
             setError('Name and city are required');
             return;
@@ -50,25 +46,33 @@ export const AddWilder = () => {
     };
 
     return (
-        <div>
             <Form onSubmit={submit}>
                 <FormGroup>
-                    <Input id="name" type="text" placeholder="Name" value={name} onChange={ e => setName(e.target.value)}/>
+                    <Input
+                        id="name"
+                        type="text"
+                        placeholder="Name"
+                        value={name} onChange={ e => setName(e.target.value)}
+                    />
                 </FormGroup>
                 <FormGroup>
-                    <Input id="city" type="text" placeholder="City" value={city} onChange={ e => setCity(e.target.value)}/>
+                    <Input
+                        id="city"
+                        type="text"
+                        placeholder="City"
+                        value={city} onChange={ e => setCity(e.target.value)}
+                    />
                 </FormGroup>
-                { error && <p>{error}</p> }
+                {error !== "" && <Error>{error}</Error>}
                 <FormGroup>
                     <Button
-                        variant="dark"
-                        className="button"
                         type="submit"
+                        disabled={loading}
+                        showLoading={loading && !delayed}
                     >
                         {loading && !delayed ? <LoadingIcon /> : "Ajouter"}
                     </Button>
                 </FormGroup>
             </Form>
-        </div>
     )
 }

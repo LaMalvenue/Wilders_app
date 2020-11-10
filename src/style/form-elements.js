@@ -1,5 +1,5 @@
 import styled, {keyframes} from "styled-components";
-import { colors } from "./globals";
+import {colors} from "./globals";
 
 export const Form = styled.form`
   display: grid;
@@ -41,15 +41,6 @@ export const Input = styled.input`
   ${focus}
 `;
 
-export const Button = styled.button`
-  background-color: ${colors.primary};
-  color: #fff;
-  padding: 0.5em 1em;
-  border-radius: 4px;
-  display: inline-block;
-  ${focus}
-`;
-
 const rotate = keyframes`
   from {
     transform: rotate(0deg);
@@ -57,4 +48,25 @@ const rotate = keyframes`
   to {
     transform: rotate(360deg);
   }
+`;
+export const Button = styled.button`
+  background-color: ${({showLoading}) => showLoading ? "#fff" : colors.primary};
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  display: inline-block;
+  ${focus}
+  svg {
+    width: 47px !important;
+    height: 47px !important;
+    animation: ${rotate} 2s linear infinite;
+    animation-play-state: running !important;
+  }
+`;
+
+export const Error = styled.p`
+  background-color: red;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
 `;
