@@ -5,8 +5,10 @@ import {ReactComponent as LoadingIcon} from "../img/arrows.svg";
 import {Button, Form, FormSkill, Input, Error} from "../style/form-elements";
 import Skill from "./Skill/Skill";
 import Col from "react-bootstrap/Col";
+import {useAddForm} from "../providers/FormContext";
+import {useWilders} from "../providers/WildersContext";
 
-export const AddWilder = ({ onSuccess }) => {
+export const AddWilder = () => {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
     const [skills, setSkills] = useState([]);
@@ -18,6 +20,9 @@ export const AddWilder = ({ onSuccess }) => {
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
 
+    const {update} = useWilders();
+    const {toggle} = useAddForm();
+
     const handleSubmit = async event => {
         event.preventDefault();
         try {
@@ -25,9 +30,12 @@ export const AddWilder = ({ onSuccess }) => {
             setLoading(true);
             setTimeout(() => setDelayed(false), 1000);
             const response = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city});
-            onSuccess();
+            await update();
+            toggle();
             if (response.data.success) {
                 setError("");
+                setName("");
+                setCity("");
             }
         } catch (e) {
             if (e.response) {
@@ -37,8 +45,6 @@ export const AddWilder = ({ onSuccess }) => {
             }
         } finally {
             setLoading(false);
-            setName("");
-            setCity("");
         }
     };
 
@@ -54,59 +60,72 @@ export const AddWilder = ({ onSuccess }) => {
     }
 
     return (
-        <Row>
-            <Col>
-                <Form onSubmit={handleSubmit}>
-                    <FormGroup>
-                        <Input
-                            id="name"
-                            type="text"
-                            placeholder="Name"
-                            value={name} onChange={e => setName(e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Input
-                            id="city"
-                            type="text"
-                            placeholder="City"
-                            value={city} onChange={e => setCity(e.target.value)}
-                        />
-                    </FormGroup>
+        <div>
+            <Row>
+                <Col>
+                    <Form onSubmit={handleSubmit}>
+                        <FormGroup>
+                            <Input
+                                id="name"
+                                type="text"
+                                placeholder="Name"
+                                value={name} onChange={e => setName(e.target.value)}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Input
+                                id="city"
+                                type="text"
+                                placeholder="City"
+                                value={city} onChange={e => setCity(e.target.value)}
+                            />
+                        </FormGroup>
+                        {
+                            error !== "" && <Error>{error}</Error>
+                        }
+                        <FormGroup>
+                            <Button
+                                type="submit"
+                                disabled={loading}
+                                showLoading={loading && !delayed}
+                            >
+                                {loading && !delayed ? <LoadingIcon/> : "Ajouter"}
+                            </Button>
+
+                        </FormGroup>
+                    </Form>
+
+                </Col>
+                <Col>
+                    <FormSkill onSubmit={handleSubmitSkill}>
+                        <FormGroup>
+                            <Input
+                                id="skill"
+                                type="text"
+                                placeholder="Nouveau skill"
+                                onChange={e => setSkillName(e.target.value)}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Button type="submit">
+                                Ajouter
+                            </Button>
+                        </FormGroup>
+                    </FormSkill>
                     {
-                        error !== "" && <Error>{error}</Error>
+                        skills.map((skill, i) => <Skill title={skill.title} key={i} onSkillDelete={deleteSkill}/>)
                     }
-                    <FormGroup>
-                        <Button
-                            type="submit"
-                            disabled={loading}
-                            showLoading={loading && !delayed}
-                        >
-                            {loading && !delayed ? <LoadingIcon/> : "Ajouter"}
-                        </Button>
-                    </FormGroup>
-                </Form>
-            </Col>
-            <Col>
-                <FormSkill onSubmit={handleSubmitSkill}>
-                    <FormGroup>
-                        <Input
-                            id="skill"
-                            type="text"
-                            placeholder="Nouveau skill"
-                            onChange={e => setSkillName(e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup>
-                        <Button type="submit">
-                            Ajouter
-                        </Button>
-                    </FormGroup>
-                </FormSkill>
-                {
-                    skills.map((skill, i) => <Skill title={skill.title} key={i} onSkillDelete={deleteSkill}/>)
-                }
-            </Col>
-        </Row>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Button className="btn-dark" onClick={() => {
+                        toggle()
+                    }}>
+                        Masquer
+                    </Button>
+                </Col>
+            </Row>
+        </div>
     )
 }

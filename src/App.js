@@ -1,5 +1,5 @@
 // *************** Imports ***************
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import axios from "axios";
 // ****** Style ******
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,24 +9,13 @@ import {Header, Footer} from "./style/elements";
 // ****** Components ******
 import {Wilder} from "./components/Wilder/Wilder";
 import {AddWilder} from "./components/AddWilder";
+import {FormContext, formContext, useAddForm} from "./providers/FormContext";
+import {useWilders, WildersContext} from "./providers/WildersContext";
 
 function App() {
-    const [wilders, setWilders] = useState([]);
-    const [showAddForm, setShowAddForm] = useState(false);
-
-    const fetchWilders = async () => {
-        try {
-            const response = await axios.get('http://localhost:5000/api/wilder');
-            const wildersResponse = response.data.result;
-            setWilders(wildersResponse);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    useEffect(() => {
-        fetchWilders();
-    }, []);
+    // *************** Contextes ***************
+    const { wilders } = useWilders();
+    const { showAddForm, toggle } = useAddForm();
 
     return (
         <div>
@@ -46,12 +35,10 @@ function App() {
                     </Row>
                     <Row>
                         <Col md>
-                            <Button className="btn-dark" onClick={() => setShowAddForm(!showAddForm)}>
+                            <Button className="btn-dark" onClick={() => { toggle() }}>
                                 {!showAddForm ? "Afficher" : "Masquer"}
                             </Button>
-                            {showAddForm === true && <AddWilder onSuccess={() => {
-                                fetchWilders()
-                            }}/>}
+                            {showAddForm === true && <AddWilder/>}
                         </Col>
                     </Row>
                     <Row>
