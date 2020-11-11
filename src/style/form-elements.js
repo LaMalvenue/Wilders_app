@@ -10,6 +10,11 @@ export const Form = styled.form`
   margin-bottom: 3rem;
 `;
 
+export const FormSkill = styled.form`
+  padding: 1rem;
+  margin-bottom: 3rem;
+`;
+
 export const Label = styled.label`
   font-size: 1.125rem;
   font-weight: 500;
@@ -53,6 +58,20 @@ export const Button = styled.button`
   background-color: ${({showLoading}) => showLoading ? "#fff" : colors.primary};
   color: #fff;
   padding: 0.5em 1em;
+  border-radius: 4px;
+  display: inline-block;
+  ${focus}
+  svg {
+    width: 47px !important;
+    height: 47px !important;
+    animation: ${rotate} 2s linear infinite;
+    animation-play-state: running !important;
+  }
+`;
+
+export const ButtonSkill = styled.button`
+  background-color: ${({showLoading}) => showLoading ? "#fff" : colors.primary};
+  color: #fff;
   border-radius: 4px;
   display: inline-block;
   ${focus}
