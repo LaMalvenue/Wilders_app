@@ -6,7 +6,7 @@ import {Button, Form, FormSkill, Input, Error} from "../style/form-elements";
 import Skill from "./Skill/Skill";
 import Col from "react-bootstrap/Col";
 
-export const AddWilder = () => {
+export const AddWilder = ({ onSuccess }) => {
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
     const [skills, setSkills] = useState([]);
@@ -18,38 +18,28 @@ export const AddWilder = () => {
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
 
-    const saveWilder = async () => {
+    const handleSubmit = async event => {
+        event.preventDefault();
         try {
             setDelayed(true)
             setLoading(true);
             setTimeout(() => setDelayed(false), 1000);
-            const result = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city, skills});
-            if (result.data.success) {
+            const response = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city});
+            onSuccess();
+            if (response.data.success) {
                 setError("");
             }
-            console.log(result);
-            alert(`Wilder saved !`);
-        } catch (error) {
-            if (error.response) {
-                setError(error.response.data.message);
+        } catch (e) {
+            if (e.response) {
+                setError(e.response.data.message);
             } else {
-                setError(error.message);
+                setError(e.message);
             }
         } finally {
             setLoading(false);
+            setName("");
+            setCity("");
         }
-    }
-
-    const handleSubmit = async event => {
-        event.preventDefault();
-        if (name.trim().length === 0 || city.trim().length === 0) {
-            setError('Name and city are required');
-            return;
-        }
-        setError(undefined);
-        await saveWilder();
-        setName("");
-        setCity("");
     };
 
     const handleSubmitSkill = async event => {
@@ -66,56 +56,56 @@ export const AddWilder = () => {
     return (
         <Row>
             <Col>
-            <Form onSubmit={handleSubmit}>
-                <FormGroup>
-                    <Input
-                        id="name"
-                        type="text"
-                        placeholder="Name"
-                        value={name} onChange={e => setName(e.target.value)}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Input
-                        id="city"
-                        type="text"
-                        placeholder="City"
-                        value={city} onChange={e => setCity(e.target.value)}
-                    />
-                </FormGroup>
-                {
-                    error !== "" && <Error>{error}</Error>
-                }
-                <FormGroup>
-                    <Button
-                        type="submit"
-                        disabled={loading}
-                        showLoading={loading && !delayed}
-                    >
-                        {loading && !delayed ? <LoadingIcon/> : "Ajouter"}
-                    </Button>
-                </FormGroup>
-            </Form>
+                <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <Input
+                            id="name"
+                            type="text"
+                            placeholder="Name"
+                            value={name} onChange={e => setName(e.target.value)}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Input
+                            id="city"
+                            type="text"
+                            placeholder="City"
+                            value={city} onChange={e => setCity(e.target.value)}
+                        />
+                    </FormGroup>
+                    {
+                        error !== "" && <Error>{error}</Error>
+                    }
+                    <FormGroup>
+                        <Button
+                            type="submit"
+                            disabled={loading}
+                            showLoading={loading && !delayed}
+                        >
+                            {loading && !delayed ? <LoadingIcon/> : "Ajouter"}
+                        </Button>
+                    </FormGroup>
+                </Form>
             </Col>
             <Col>
-            <FormSkill onSubmit={handleSubmitSkill}>
-                <FormGroup>
-                    <Input
-                        id="skill"
-                        type="text"
-                        placeholder="Nouveau skill"
-                        onChange={e => setSkillName(e.target.value)}
-                    />
-                </FormGroup>
-                <FormGroup>
-                    <Button type="submit">
-                        Ajouter
-                    </Button>
-                </FormGroup>
-            </FormSkill>
-            {
-                skills.map((skill, i) => <Skill title={skill.title} key={i} onSkillDelete={deleteSkill}/>)
-            }
+                <FormSkill onSubmit={handleSubmitSkill}>
+                    <FormGroup>
+                        <Input
+                            id="skill"
+                            type="text"
+                            placeholder="Nouveau skill"
+                            onChange={e => setSkillName(e.target.value)}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Button type="submit">
+                            Ajouter
+                        </Button>
+                    </FormGroup>
+                </FormSkill>
+                {
+                    skills.map((skill, i) => <Skill title={skill.title} key={i} onSkillDelete={deleteSkill}/>)
+                }
             </Col>
         </Row>
     )

@@ -4,27 +4,29 @@ import axios from "axios";
 // ****** Style ******
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./style/App.css";
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import {Header, Footer} from "./style/elements";
 // ****** Components ******
 import {Wilder} from "./components/Wilder/Wilder";
 import {AddWilder} from "./components/AddWilder";
 
 function App() {
-
     const [wilders, setWilders] = useState([]);
-        useEffect(() => {
-            const fetchWilders = async () => {
-                try {
-                    const response = await axios.get('http://localhost:5000/api/wilder');
-                    const wilders = response.data.result;
-                    setWilders(wilders);
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-            fetchWilders();
-        }, []);
+    const [showAddForm, setShowAddForm] = useState(false);
+
+    const fetchWilders = async () => {
+        try {
+            const response = await axios.get('http://localhost:5000/api/wilder');
+            const wildersResponse = response.data.result;
+            setWilders(wildersResponse);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchWilders();
+    }, []);
 
     return (
         <div>
@@ -44,7 +46,12 @@ function App() {
                     </Row>
                     <Row>
                         <Col md>
-                           <AddWilder/>
+                            <Button className="btn-dark" onClick={() => setShowAddForm(!showAddForm)}>
+                                {!showAddForm ? "Afficher" : "Masquer"}
+                            </Button>
+                            {showAddForm === true && <AddWilder onSuccess={() => {
+                                fetchWilders()
+                            }}/>}
                         </Col>
                     </Row>
                     <Row>

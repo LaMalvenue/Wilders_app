@@ -30,12 +30,3 @@ p, ul {
     color: #757575;
     line-height: 1.5;
 }
-
-.skills {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}

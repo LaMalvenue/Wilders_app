@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import image from "../../img/profile.png";
 import { Card } from 'react-bootstrap';
 import { Skill } from "../Skill/Skill";
+import {ListSkills} from "../../style/elements";
 
 export function Wilder({ city, name, skills }) {
     const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
@@ -21,9 +22,9 @@ export function Wilder({ city, name, skills }) {
                         {description}
                     </Card.Text>
                     <h3>Wild Skills</h3>
-                    <ul className="skills">
+                    <ListSkills>
                         { skills.map((skill) =>  <Skill key={skill._id} {...skill} />) }
-                    </ul>
+                    </ListSkills>
                 </Card.Body>
             </Card>
         </div>

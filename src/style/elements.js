@@ -1,5 +1,5 @@
 import styled, {keyframes} from "styled-components";
-import { colors } from "./globals";
+import {colors} from "./globals";
 
 export const Header = styled.header`
     background-color: ${colors.primary};
@@ -12,11 +12,20 @@ export const Footer = styled.footer`
     text-align: center;
 `;
 
+export const ListSkills = styled.ul`
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+`;
+
 export const Badge = styled.span`
     align-items: center;
     display: flex;
     justify-content: center;
-    background-color: ${({ votes }) => votes > 10 ? 'rgba(0, 0, 0, .9)' : 'rgba(0, 0, 0, .3)'}; 
+    background-color: ${({votes}) => votes > 10 ? 'rgba(0, 0, 0, .9)' : 'rgba(0, 0, 0, .3)'}; 
     color: #FFF;
     border-radius: 9999px;
     height: 20px;

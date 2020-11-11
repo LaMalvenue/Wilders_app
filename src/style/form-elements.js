@@ -57,13 +57,14 @@ const rotate = keyframes`
 export const Button = styled.button`
   background-color: ${({showLoading}) => showLoading ? "#fff" : colors.primary};
   color: #fff;
+  width: 100px;
   padding: 0.5em 1em;
   border-radius: 4px;
   display: inline-block;
   ${focus}
   svg {
-    width: 47px !important;
-    height: 47px !important;
+    width: 23px !important;
+    height: 23px !important;
     animation: ${rotate} 2s linear infinite;
     animation-play-state: running !important;
   }
