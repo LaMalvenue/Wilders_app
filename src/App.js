@@ -21,6 +21,10 @@ function App() {
      await axios.delete(`http://localhost:5000/api/wilder/${id}`);
      await update();
     }
+    const updateWilder = async (id) => {
+        await axios.put(`http://localhost:5000/api/wilder/${id}`);
+        await update();
+    }
 
     return (
       <div>
@@ -41,7 +45,7 @@ function App() {
             <Row>
               <Col md>
                 <Button
-                  className="btn-dark"
+                  className="btn-dark btn"
                   onClick={() => {
                     toggle();
                   }}
@@ -62,6 +66,7 @@ function App() {
                   <Wilder
                     key={wilder._id}
                     deleteWilder={deleteWilder}
+                    updateWilder={updateWilder}
                     {...wilder}
                   />
                 </Col>

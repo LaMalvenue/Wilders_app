@@ -94,7 +94,6 @@ export const AddWilder = () => {
 
                         </FormGroup>
                     </Form>
-
                 </Col>
                 <Col>
                     <FormSkill onSubmit={handleSubmitSkill}>
@@ -102,6 +101,7 @@ export const AddWilder = () => {
                             <Input
                                 id="skill"
                                 type="text"
+                                value={skillName}
                                 placeholder="Nouveau skill"
                                 onChange={e => setSkillName(e.target.value)}
                             />
@@ -115,15 +115,6 @@ export const AddWilder = () => {
                     {
                         skills.map((skill, i) => <Skill title={skill.title} key={i} onSkillDelete={deleteSkill}/>)
                     }
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <Button className="btn-dark" onClick={() => {
-                        toggle()
-                    }}>
-                        Masquer
-                    </Button>
                 </Col>
             </Row>
         </div>

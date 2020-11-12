@@ -80,5 +80,7 @@ footer p {
   display: inline-block;
 }
 
-
+.bouton {
+  width: inherit;
+}
 
