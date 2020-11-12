@@ -1,32 +1,31 @@
 import "./Wilder.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import image from "../../img/profile.png";
-import { Card } from 'react-bootstrap';
+import { Card ,Button} from 'react-bootstrap';
 import { Skill } from "../Skill/Skill";
 import {ListSkills} from "../../style/elements";
 
-export function Wilder({ city, name, skills }) {
-    const description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+export const Wilder = props => {
 
     return (
-        <div>
-            <Card className="shadow-sm bg-white rounded">
-                <Card.Img variant="top" src={image} alt={`${name} Profile`} />
-                <Card.Body className="d-flex flex-column">
-                    <div className="d-flex mb-2 justify-content-beetween">
-                        <Card.Title className="mb-0 font-weight-bold">{name}</Card.Title>
-                    </div>
-                    <h4>City</h4>
-                    <p>{city}</p>
-                    <Card.Text className="text-secondary">
-                        {description}
-                    </Card.Text>
-                    <h3>Wild Skills</h3>
-                    <ListSkills>
-                        { skills.map((skill) =>  <Skill key={skill._id} {...skill} />) }
-                    </ListSkills>
-                </Card.Body>
-            </Card>
-        </div>
+      <div>
+        <Card className="shadow-sm bg-white rounded">
+          <Card.Img variant="top" src={image} alt={`${props.name} Profile`} />
+          <Card.Body className="d-flex flex-column">
+            <div className="d-flex mb-2 justify-content-between">
+              <Card.Title className="mb-0 font-weight-bold">{props.name}</Card.Title>
+            </div>
+            <Card.Text className="text-secondary">Ville : {props.city}</Card.Text>
+            <h3>Wild Skills</h3>
+            <ListSkills>
+              {props.skills.map((skill) => (
+                <Skill key={skill._id} {...skill} />
+              ))}
+            </ListSkills>
+          </Card.Body>
+          <Button onClick={() => props.deleteWilder(props._id)}>Supprimer</Button>
+        </Card>
+      </div>
     );
 };
+

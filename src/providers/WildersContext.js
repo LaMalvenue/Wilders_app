@@ -7,15 +7,16 @@ export const WildersContextProvider = ({children}) => {
     const [wilders, setWilders] = useState([]);
 
     return (
+        <div>
         <WildersContext.Provider value={{wilders, setWilders}}>
             {children}
         </WildersContext.Provider>
+        </div>
     );
 };
 
 export function useWilders() {
     const { wilders, setWilders } = useContext(WildersContext);
-
     const fetchWilders = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/wilder');

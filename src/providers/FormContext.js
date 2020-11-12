@@ -1,11 +1,11 @@
-import React, {createContext, useContext, useReducer, useState} from "react";
+import React, {createContext, useContext, useReducer} from "react";
 
 export const FormContext = createContext();
 
 const initialValue = {showAddForm: false};
 
 const reducer = (oldState, action) => {
-    if (action.type === 'TOOGLE') {
+    if (action.type === 'TOGGLE') {
         return {...oldState, showAddForm: !oldState.showAddForm};
     } else {
         return oldState;
@@ -14,7 +14,6 @@ const reducer = (oldState, action) => {
 
 export const FormContextProvider = ({children}) => {
     const [formState, dispatch] = useReducer(reducer, initialValue);
-    //const [showAddForm, setShowAddForm] = useState(false);
 
     return (
         <FormContext.Provider value={{formState, dispatch}}>

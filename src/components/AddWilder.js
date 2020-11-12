@@ -16,21 +16,20 @@ export const AddWilder = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [delayed, setDelayed] = useState(false);
-
     const [, updateState] = useState();
     const forceUpdate = useCallback(() => updateState({}), []);
-
     const {update} = useWilders();
     const {toggle} = useAddForm();
 
     const handleSubmit = async event => {
         event.preventDefault();
         try {
-            setDelayed(true)
+            setDelayed(true);
             setLoading(true);
             setTimeout(() => setDelayed(false), 1000);
-            const response = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city});
+            const response = await axios.post('http://127.0.0.1:5000/api/wilder', {name, city, skills});
             await update();
+
             toggle();
             if (response.data.success) {
                 setError("");
@@ -52,6 +51,7 @@ export const AddWilder = () => {
         event.preventDefault();
         skills.push({title: skillName});
         await setSkills(skills);
+        setSkillName("");
         forceUpdate();
     };
 

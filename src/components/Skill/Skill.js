@@ -5,11 +5,13 @@ import {ButtonSkill} from "../../style/form-elements";
 
 export const Skill = ({ title, count, onSkillDelete }) => {
     return (
+        <ul>
         <li>
             {title}
             <Badge count={count} key={title}>{count}</Badge>
             <ButtonSkill onClick={() => onSkillDelete(title)}>x</ButtonSkill>
         </li>
+      </ul> 
     );
 };
 
